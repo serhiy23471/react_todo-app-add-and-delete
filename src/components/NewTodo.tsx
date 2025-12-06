@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks, react-hooks/exhaustive-deps */
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Todo } from '../types/Todo';
 import { createTodo, USER_ID } from '../api/todos';
@@ -22,7 +20,8 @@ export const NewTodo: React.FC<Props> = ({
   const [title, setTitle] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const inputRef = newTodoRef || useRef<HTMLInputElement>(null);
+  const internalRef = useRef<HTMLInputElement>(null);
+  const inputRef = newTodoRef ?? internalRef;
 
   useEffect(() => {
     if (!loading && inputRef.current) {
@@ -43,7 +42,6 @@ export const NewTodo: React.FC<Props> = ({
 
     if (!trimmed) {
       setError('Title should not be empty');
-
       return;
     }
 
@@ -74,7 +72,6 @@ export const NewTodo: React.FC<Props> = ({
       setTodos(prev => prev.filter(t => t.id !== tempTodo.id));
     } finally {
       setLoading(false);
-      // inputRef.current?.focus();
     }
   };
 

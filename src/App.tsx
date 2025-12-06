@@ -26,13 +26,11 @@ export const App: React.FC = () => {
 
   const newTodoRef = useRef<HTMLInputElement>(null);
 
-  // --- Helpers for individual loaders ---
   const addLoading = (id: number) =>
     setLoadingIds(prev => (prev.includes(id) ? prev : [...prev, id]));
   const removeLoading = (id: number) =>
     setLoadingIds(prev => prev.filter(lid => lid !== id));
 
-  // --- Load Todos ---
   useEffect(() => {
     setLoading(true);
     setError(null);
@@ -40,10 +38,9 @@ export const App: React.FC = () => {
     getTodos()
       .then(data => setTodos(data))
       .catch(() => setError('Unable to load todos'))
-        .finally(() => setLoading(false));
+      .finally(() => setLoading(false));
   }, []);
 
-  // --- Filtered todos ---
   const visibleTodos = todos.filter(todo => {
     if (filter === FILTERS.active) {
       return !todo.completed;
@@ -67,7 +64,6 @@ export const App: React.FC = () => {
     return null;
   }
 
-  // --- Toggle All ---
   const handleToggleAll = async () => {
     if (!todos.length) {
       return;
@@ -107,7 +103,6 @@ export const App: React.FC = () => {
     }
   };
 
-  // --- Clear Completed ---
   const handleClearCompleted = async () => {
     const completedTodos = todos.filter(t => t.completed);
 

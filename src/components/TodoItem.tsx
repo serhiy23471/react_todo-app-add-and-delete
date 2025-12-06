@@ -29,7 +29,6 @@ export const TodoItem: React.FC<Props> = ({
   const isLoading = loadingIds.includes(todo.id);
   const showLoader = isLoading || todo.isTemp;
 
-  // --- Toggle single todo ---
   const handleToggle = async () => {
     addLoading(todo.id);
     try {
@@ -43,7 +42,6 @@ export const TodoItem: React.FC<Props> = ({
     }
   };
 
-  // --- Delete ---
   const handleDelete = async () => {
     addLoading(todo.id);
     try {
@@ -57,7 +55,6 @@ export const TodoItem: React.FC<Props> = ({
     }
   };
 
-  // --- Edit ---
   const handleSave = async () => {
     const trimmed = editValue.trim();
 
